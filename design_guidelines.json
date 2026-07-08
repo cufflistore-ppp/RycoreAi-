@@ -1,0 +1,109 @@
+{
+  "app_name": "Cuffli AI",
+  "personality": "1 iOS-Native Clean",
+  "personality_one_liner": "A sleek, highly readable, premium dark-mode chat interface that feels effortlessly native and intentionally restrained.",
+  "color": {
+    "surface": "#000000",
+    "onSurface": "#F2F2F2",
+    "surfaceSecondary": "#151515",
+    "onSurfaceSecondary": "#EAEAEA",
+    "surfaceTertiary": "#222222",
+    "onSurfaceTertiary": "#D4D4D4",
+    "surfaceInverse": "#F2F2F2",
+    "onSurfaceInverse": "#000000",
+    "brand": "#4F9C7A",
+    "brandPrimary": "#4F9C7A",
+    "onBrandPrimary": "#000000",
+    "brandSecondary": "#3A755C",
+    "onBrandSecondary": "#F2F2F2",
+    "brandTertiary": "#1A3328",
+    "onBrandTertiary": "#8CDEBA",
+    "success": "#4F9C7A",
+    "onSuccess": "#000000",
+    "warning": "#D9822B",
+    "onWarning": "#000000",
+    "error": "#D94545",
+    "onError": "#FFFFFF",
+    "border": "#222222",
+    "borderStrong": "#333333",
+    "divider": "#151515"
+  },
+  "typography": {
+    "displayFontFamily": "Geist",
+    "textFontFamily": "Geist",
+    "scale": { "sm": 12, "base": 14, "lg": 16, "xl": 20, "2xl": 24 }
+  },
+  "spacing": { "rule": "Generous vertical breathing room for chat bubbles. Tight padding inside composer. Obvious hit slops for actions.", "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 24, "2xl": 32, "3xl": 48 },
+  "radius_tokens": { "sm": 6, "md": 12, "lg": 20, "pill": 999 },
+  "shadow_tier": "1",
+  "navigation": "drawer",
+  "icon_set": "Phosphor",
+  "glassmorphism": {
+    "enabled": "true",
+    "do's": ["Apply heavy dark glass effect to the top header and bottom composer container so scrolling messages blur smoothly beneath them.", "Ensure a tinted underlying base (≥75% opacity) to maintain high contrast for composer inputs."],
+    "dont's": ["Do not blur individual chat bubbles.", "Do not use glass inside the drawer."]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceTertiary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "haptics": {
+    "events": {
+      "send_message": "impactMedium",
+      "open_drawer": "selection",
+      "copy_message": "notificationSuccess",
+      "new_chat": "impactLight",
+      "upload_image": "impactLight"
+    }
+  },
+  "screens": [
+    { 
+      "name": "Chat", 
+      "purpose": "The main conversational interface for AI interaction.", 
+      "states": { 
+        "loading": "Centered soft pulsing AI orb logo.", 
+        "empty": "Subtle dark tech texture background with a centered greeting 'Halo! Apa yang bisa saya bantu hari ini?' and suggestion chips.", 
+        "error": "Small inline error bubble with a 'Coba lagi' (Retry) button." 
+      }, 
+      "layout": "Root uses a full pure black background. Top header is sticky glass with Hamburger (left) and New Chat (right). Message stream takes full width with 16px padding. User bubbles are right-aligned, surfaceSecondary color, max-width 80%. AI messages are left-aligned, transparent background, with an AI avatar on the left. The composer is pinned to the bottom inside a KeyboardAvoidingView with a glass backdrop, containing an attachment (plus) icon, auto-expanding text input, and a send button." 
+    },
+    { 
+      "name": "HistoryDrawer", 
+      "purpose": "Slide-in drawer to manage past conversations and view creator info.", 
+      "states": { 
+        "loading": "Skeleton rows.", 
+        "empty": "Text 'Belum ada obrolan'.", 
+        "error": "Text 'Gagal memuat riwayat'." 
+      }, 
+      "layout": "Full height drawer sliding from the left. Background is surfaceSecondary. Top has a prominent 'Obrolan Baru' (New Chat) pill button. Below is a ScrollView of past chats (title and date). The bottom safe area houses a static footer reading 'Dibuat oleh cuffli' with a subtle version number." 
+    }
+  ],
+  "images": {
+    "ai_avatar_orb": { 
+      "url": "https://images.unsplash.com/photo-1622737133809-d95047b9e673?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdlb21ldHJpYyUyMGdsb3dpbmclMjBvcmIlMjBtaW5pbWFsfGVufDB8fHx8MTc4MzQ4MjQzOXww&ixlib=rb-4.1.0&q=85", 
+      "alt": "Warm glowing geometric cubes abstract logo" 
+    },
+    "dark_tech_texture": { 
+      "url": "https://images.unsplash.com/photo-1541816139614-b1c0b6a13f5b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwyfHxkYXJrJTIwbWluaW1hbCUyMHRlY2glMjB0ZXh0dXJlfGVufDB8fHx8MTc4MzQ4MjQzOXww&ixlib=rb-4.1.0&q=85", 
+      "alt": "Subtle dark minimal tech texture with dots" 
+    }
+  },
+  "instructions_to_main_agent": [
+    "Ensure the main background is explicitly set to `#000000` as requested by the user ('Warna latar belakang nya itam').",
+    "Use Phosphor icons. Make sure the attachment icon inside the composer allows users to select an image from gallery/camera.",
+    "For the AI message streaming effect, ensure Reanimated is used for a smooth typewriter effect without layout jumping.",
+    "The Drawer must have a persistent footer containing the text 'Dibuat oleh cuffli' as explicitly requested.",
+    "Make sure the composer input bar dynamically resizes with multiline text and correctly shifts up with the KeyboardAvoidingView on both iOS and Android.",
+    "Implement a 'Copy Message' feature on long-press of any AI message bubble, triggering a haptic 'notificationSuccess'.",
+    "Use Indonesian for all system strings (e.g., 'Ketik pesan...', 'Obrolan Baru', 'Coba lagi').",
+    "Never use blue, indigo, or purple. Stick strictly to the provided neutral/sage palette."
+  ]
+}
