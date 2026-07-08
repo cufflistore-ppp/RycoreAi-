@@ -14,6 +14,9 @@ from datetime import datetime
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
+HF_API_KEY=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
+HF_MODEL=Qwen/Qwen3-8B
+
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
